@@ -1,0 +1,14 @@
+.research-grid{grid-template-columns:minmax(704px,1.5fr) minmax(350px,1fr)}
+.ranking-panel>.table-scroll{max-height:960px;overflow:auto}
+.group-table thead{position:sticky;top:0;z-index:2}
+.score-track{display:block;margin-left:auto}
+.detail-panel{position:sticky;top:16px;max-height:calc(100dvh - 100px);overflow-y:auto;overscroll-behavior:contain;scroll-margin-top:16px}
+.table-navigation{display:flex;align-items:center;gap:var(--space-2);padding:0 var(--space-5) var(--space-2);font-size:var(--text-xs);color:var(--muted)}
+.table-navigation span{margin-right:auto}
+.table-navigation button{display:flex;align-items:center;justify-content:center;min-width:36px;min-height:36px;border:1px solid var(--border);border-radius:4px}
+@media(max-width:1380px){
+ .research-grid{grid-template-columns:minmax(0,1fr)}
+ .detail-panel{position:static;max-height:none}
+ .ranking-panel>.table-scroll{max-height:640px}
+}
+@media(max-width:760px){.ranking-panel>.table-scroll{max-height:520px}.table-navigation{padding-inline:var(--space-4)}}

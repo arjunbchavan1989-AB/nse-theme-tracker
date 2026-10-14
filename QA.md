@@ -50,6 +50,10 @@ Results and exclusions are recorded below after execution.
 - Mobile navigation closed normally; selecting a group scrolled its leader panel into view. Waited for the navigation transition and smooth scroll to settle before final visual signoff.
 - Public [GitHub Pages site](https://arjunbchavan1989-ab.github.io/nse-theme-tracker/) loaded with independent snapshot, no bootstrap warning and no document overflow.
 - Static review found no dangerous HTML rendering, eval, embedded credentials, backend mutations or storage of account data. JS dependencies are bundled, not loaded from script CDNs.
+- Cached independent refresh [38639121481](https://github.com/arjunbchavan1989-AB/nse-theme-tracker/actions/runs/38639121481) completed successfully, including Pages deployment. The corrected official legacy constituent schema is now exercised in production.
+- Deployment validator identified a genuinely clipped terminal column at narrow desktop; changed to a stacked research layout at ≤1380px, added explicit horizontal table-navigation controls and separated shown/ranked/limited counts.
+- 1366px regression: table width1064px equals its container1064px, no clipped terminal column or document overflow; visible counts explicitly say67 shown /66 ranked /1 limited for that snapshot.
+- Mobile right/left table-navigation controls moved the inner scroll container and returned to the start. Desktop leader panel now has explicit independent vertical scrolling when its content exceeds viewport height.
 
 ## Known limitations
 
