@@ -366,6 +366,12 @@
       "sector": "Technology",
       "source": "Finance provider classification metadata"
     },
+    "ADVANCE": {
+      "date": "2026-10-14",
+      "industry": "Agricultural Inputs",
+      "sector": "Basic Materials",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "ADVANIHOTR": {
       "date": "2026-10-15",
       "industry": "Travel Lodging",
@@ -390,6 +396,12 @@
       "sector": "Energy",
       "source": "Finance provider classification metadata"
     },
+    "AEQUS": {
+      "date": "2026-10-14",
+      "industry": "Aerospace & Defense",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "AEROENTER": {
       "date": "2026-10-15",
       "industry": "Industrial - Machinery",
@@ -407,6 +419,12 @@
       "industry": "Packaging & Containers",
       "sector": "Consumer Cyclical",
       "source": "Finance provider classification metadata"
+    },
+    "AEROPLANE": {
+      "date": "2026-10-14",
+      "industry": "Farm Products",
+      "sector": "Consumer Defensive",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "AETHER": {
       "date": "2026-10-15",
@@ -467,6 +485,12 @@
       "industry": "Chemicals - Specialty",
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
+    },
+    "AGI": {
+      "date": "2026-10-14",
+      "industry": "Packaging & Containers",
+      "sector": "Consumer Cyclical",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "AGIIL": {
       "date": "2026-10-15",
@@ -659,6 +683,12 @@
       "industry": "Real Estate - Development",
       "sector": "Real Estate",
       "source": "Finance provider classification metadata"
+    },
+    "ALGOQUANT": {
+      "date": "2026-10-14",
+      "industry": "Capital Markets",
+      "sector": "Financial Services",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "ALICON": {
       "date": "2026-10-15",
@@ -1067,6 +1097,12 @@
       "industry": "Real Estate - Development",
       "sector": "Real Estate",
       "source": "Finance provider classification metadata"
+    },
+    "ARIS": {
+      "date": "2026-10-14",
+      "industry": "Engineering & Construction",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "ARISTO-SM": {
       "date": "2026-10-15",
@@ -2316,6 +2352,12 @@
       "sector": "Communication Services",
       "source": "Finance provider classification metadata"
     },
+    "BUILDPRO": {
+      "date": "2026-10-14",
+      "industry": "Home Improvement Retail",
+      "sector": "Consumer Cyclical",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "BURNPUR": {
       "date": "2026-10-15",
       "industry": "Construction Materials",
@@ -2381,6 +2423,12 @@
       "industry": "Financial - Mortgages",
       "sector": "Financial Services",
       "source": "Finance provider classification metadata"
+    },
+    "CANHLIFE": {
+      "date": "2026-10-14",
+      "industry": "Insurance - Life",
+      "sector": "Financial Services",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "CANTABIL": {
       "date": "2026-10-15",
@@ -2501,6 +2549,12 @@
       "industry": "Engineering & Construction",
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
+    },
+    "CEINSYS": {
+      "date": "2026-10-14",
+      "industry": "Engineering & Construction",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "CELEBRITY": {
       "date": "2026-10-15",
@@ -2748,6 +2802,12 @@
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
     },
+    "CMLL": {
+      "date": "2026-10-14",
+      "industry": "Thermal Coal",
+      "sector": "Energy",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "CMNL": {
       "date": "2026-10-15",
       "industry": "Steel",
@@ -2897,6 +2957,12 @@
       "industry": "Real Estate - Services",
       "sector": "Real Estate",
       "source": "Finance provider classification metadata"
+    },
+    "CORDELIA": {
+      "date": "2026-10-14",
+      "industry": "Marine Shipping",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "CORDSCABLE": {
       "date": "2026-10-15",
@@ -3245,6 +3311,12 @@
       "industry": "Construction Materials",
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
+    },
+    "DECNGOLD": {
+      "date": "2026-10-14",
+      "industry": "Gold",
+      "sector": "Basic Materials",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "DEEDEV": {
       "date": "2026-10-15",
@@ -4014,6 +4086,12 @@
       "sector": "Consumer Cyclical",
       "source": "Finance provider classification metadata"
     },
+    "EPACKPEB": {
+      "date": "2026-10-14",
+      "industry": "Engineering & Construction",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "EPIGRAL": {
       "date": "2026-10-15",
       "industry": "Chemicals",
@@ -4152,6 +4230,12 @@
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
     },
+    "EXCELSOFT": {
+      "date": "2026-10-14",
+      "industry": "Software - Application",
+      "sector": "Technology",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "EXICOM": {
       "date": "2026-10-15",
       "industry": "Electrical Equipment & Parts",
@@ -4212,6 +4296,12 @@
       "sector": "Healthcare",
       "source": "Finance provider classification metadata"
     },
+    "FEDDERSHOL": {
+      "date": "2026-10-14",
+      "industry": "Credit Services",
+      "sector": "Financial Services",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "FEDERALBNK": {
       "date": "2026-10-15",
       "industry": "Banks - Regional",
@@ -4235,6 +4325,12 @@
       "industry": "Environmental Services",
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
+    },
+    "FERMENTA": {
+      "date": "2026-10-14",
+      "industry": "Drug Manufacturers - Specialty & Generic",
+      "sector": "Healthcare",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "FIBERWEB": {
       "date": "2026-10-15",
@@ -4398,11 +4494,23 @@
       "sector": "Technology",
       "source": "Finance provider classification metadata"
     },
+    "FREDUN": {
+      "date": "2026-10-14",
+      "industry": "Drug Manufacturers - Specialty & Generic",
+      "sector": "Healthcare",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "FROG": {
       "date": "2026-10-15",
       "industry": "Communication Equipment",
       "sector": "Technology",
       "source": "Finance provider classification metadata"
+    },
+    "FRONTSP": {
+      "date": "2026-10-14",
+      "industry": "Metal Fabrication",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "FSL": {
       "date": "2026-10-15",
@@ -4475,6 +4583,12 @@
       "industry": "Chemicals - Specialty",
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
+    },
+    "GANESHCP": {
+      "date": "2026-10-14",
+      "industry": "Packaged Foods",
+      "sector": "Consumer Defensive",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "GANESHHOU": {
       "date": "2026-10-15",
@@ -4686,6 +4800,18 @@
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
     },
+    "GKENERGY": {
+      "date": "2026-10-14",
+      "industry": "Utilities - Renewable",
+      "sector": "Utilities",
+      "source": "Yahoo Finance industry (fallback)"
+    },
+    "GKSL": {
+      "date": "2026-10-14",
+      "industry": "Medical Care Facilities",
+      "sector": "Healthcare",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "GKWLIMITED": {
       "date": "2026-10-15",
       "industry": "Specialty Business Services",
@@ -4793,6 +4919,12 @@
       "industry": "Chemicals",
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
+    },
+    "GNRL": {
+      "date": "2026-10-14",
+      "industry": "Oil & Gas E&P",
+      "sector": "Energy",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "GOACARBON": {
       "date": "2026-10-15",
@@ -4979,6 +5111,12 @@
       "industry": "Construction Materials",
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
+    },
+    "GRAUWEIL": {
+      "date": "2026-10-14",
+      "industry": "Specialty Chemicals",
+      "sector": "Basic Materials",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "GRAVITA": {
       "date": "2026-10-15",
@@ -5213,6 +5351,12 @@
       "industry": "Electrical Equipment & Parts",
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
+    },
+    "GYFTR": {
+      "date": "2026-10-14",
+      "industry": "Specialty Business Services",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "HAL": {
       "date": "2026-10-15",
@@ -5952,6 +6096,12 @@
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
     },
+    "INA": {
+      "date": "2026-10-14",
+      "industry": "Solar",
+      "sector": "Technology",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "INCREDIBLE": {
       "date": "2026-10-15",
       "industry": "Steel",
@@ -6077,6 +6227,12 @@
       "industry": "Agricultural - Machinery",
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
+    },
+    "INDOMIM": {
+      "date": "2026-10-14",
+      "industry": "Metal Fabrication",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "INDORAMA": {
       "date": "2026-10-15",
@@ -6498,6 +6654,12 @@
       "sector": "Consumer Cyclical",
       "source": "Finance provider classification metadata"
     },
+    "JARO": {
+      "date": "2026-10-14",
+      "industry": "Education & Training Services",
+      "sector": "Consumer Defensive",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "JASH": {
       "date": "2026-10-15",
       "industry": "Industrial - Machinery",
@@ -6515,6 +6677,12 @@
       "industry": "Auto - Parts",
       "sector": "Consumer Cyclical",
       "source": "Finance provider classification metadata"
+    },
+    "JAYKAY": {
+      "date": "2026-10-14",
+      "industry": "Specialty Business Services",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "JAYNECOIND": {
       "date": "2026-10-15",
@@ -7170,6 +7338,12 @@
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
     },
+    "KMCSHIL": {
+      "date": "2026-10-14",
+      "industry": "Medical Care Facilities",
+      "sector": "Healthcare",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "KMEW": {
       "date": "2026-10-15",
       "industry": "Marine Shipping",
@@ -7410,6 +7584,12 @@
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
     },
+    "KSHINTL": {
+      "date": "2026-10-14",
+      "industry": "Electrical Equipment & Parts",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "KSHITIJPOL": {
       "date": "2026-10-15",
       "industry": "Packaging & Containers",
@@ -7439,6 +7619,12 @@
       "industry": "Paper, Lumber & Forest Products",
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
+    },
+    "KWIL": {
+      "date": "2026-10-14",
+      "industry": "Packaged Foods",
+      "sector": "Consumer Defensive",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "LAGNAM": {
       "date": "2026-10-15",
@@ -7559,6 +7745,12 @@
       "industry": "Industrial - Infrastructure Operations",
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
+    },
+    "LCL": {
+      "date": "2026-10-14",
+      "industry": "Specialty Industrial Machinery",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "LEAPIND": {
       "date": "2026-10-15",
@@ -8190,6 +8382,12 @@
       "sector": "Healthcare",
       "source": "Finance provider classification metadata"
     },
+    "MARSONS": {
+      "date": "2026-10-14",
+      "industry": "Electrical Equipment & Parts",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "MARUTI": {
       "date": "2026-10-15",
       "industry": "Auto - Manufacturers",
@@ -8346,6 +8544,12 @@
       "sector": "Financial Services",
       "source": "Finance provider classification metadata"
     },
+    "MEDANTA": {
+      "date": "2026-10-14",
+      "industry": "Medical Care Facilities",
+      "sector": "Healthcare",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "MEDIASSIST": {
       "date": "2026-10-15",
       "industry": "Asset Management",
@@ -8489,6 +8693,12 @@
       "industry": "Steel",
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
+    },
+    "MIIL": {
+      "date": "2026-10-14",
+      "industry": "Real Estate - Development",
+      "sector": "Real Estate",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "MILKYMIST": {
       "date": "2026-10-15",
@@ -8838,6 +9048,12 @@
       "sector": "Financial Services",
       "source": "Finance provider classification metadata"
     },
+    "MVELECTRO": {
+      "date": "2026-10-14",
+      "industry": "Electrical Equipment & Parts",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "MVGJL": {
       "date": "2026-10-15",
       "industry": "Specialty Retail",
@@ -9065,6 +9281,12 @@
       "industry": "Chemicals - Specialty",
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
+    },
+    "NEPHROPLUS": {
+      "date": "2026-10-14",
+      "industry": "Medical Care Facilities",
+      "sector": "Healthcare",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "NESCO": {
       "date": "2026-10-15",
@@ -9534,6 +9756,12 @@
       "sector": "Energy",
       "source": "Finance provider classification metadata"
     },
+    "ONIXSOLAR": {
+      "date": "2026-10-14",
+      "industry": "Solar",
+      "sector": "Technology",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "ONMOBILE": {
       "date": "2026-10-15",
       "industry": "Telecommunications Services",
@@ -9684,11 +9912,23 @@
       "sector": "Financial Services",
       "source": "Finance provider classification metadata"
     },
+    "OSWALPUMPS": {
+      "date": "2026-10-14",
+      "industry": "Electrical Equipment & Parts",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "OSWALSEEDS": {
       "date": "2026-10-15",
       "industry": "Agricultural Inputs",
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
+    },
+    "PACEDIGITK": {
+      "date": "2026-10-14",
+      "industry": "Communication Equipment",
+      "sector": "Technology",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "PAGEIND": {
       "date": "2026-10-15",
@@ -9738,6 +9978,12 @@
       "sector": "Energy",
       "source": "Finance provider classification metadata"
     },
+    "PANORAMA": {
+      "date": "2026-10-14",
+      "industry": "Entertainment",
+      "sector": "Communication Services",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "PANSARI": {
       "date": "2026-10-15",
       "industry": "Real Estate - Development",
@@ -9785,6 +10031,12 @@
       "industry": "Furnishings, Fixtures & Appliances",
       "sector": "Consumer Cyclical",
       "source": "Finance provider classification metadata"
+    },
+    "PARKHOSPS": {
+      "date": "2026-10-14",
+      "industry": "Medical Care Facilities",
+      "sector": "Healthcare",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "PARKHOTELS": {
       "date": "2026-10-15",
@@ -10800,6 +11052,12 @@
       "sector": "Consumer Cyclical",
       "source": "Finance provider classification metadata"
     },
+    "RAYMONDREL": {
+      "date": "2026-10-14",
+      "industry": "Real Estate - Development",
+      "sector": "Real Estate",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "RBA": {
       "date": "2026-10-15",
       "industry": "Restaurants",
@@ -11022,6 +11280,12 @@
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
     },
+    "RIR": {
+      "date": "2026-10-14",
+      "industry": "Semiconductors",
+      "sector": "Technology",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "RISHABH": {
       "date": "2026-10-15",
       "industry": "Electrical Equipment & Parts",
@@ -11202,6 +11466,12 @@
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
     },
+    "RSL": {
+      "date": "2026-10-14",
+      "industry": "Steel",
+      "sector": "Basic Materials",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "RSSOFTWARE": {
       "date": "2026-10-15",
       "industry": "Software - Application",
@@ -11237,6 +11507,12 @@
       "industry": "Chemicals - Specialty",
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
+    },
+    "RUBICON": {
+      "date": "2026-10-14",
+      "industry": "Drug Manufacturers - General",
+      "sector": "Healthcare",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "RUBYMILLS": {
       "date": "2026-10-15",
@@ -11316,6 +11592,12 @@
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
     },
+    "SAATVIKGL": {
+      "date": "2026-10-14",
+      "industry": "Solar",
+      "sector": "Technology",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "SADBHAV": {
       "date": "2026-10-15",
       "industry": "Engineering & Construction",
@@ -11387,6 +11669,12 @@
       "industry": "Medical - Diagnostics & Research",
       "sector": "Healthcare",
       "source": "Finance provider classification metadata"
+    },
+    "SAIPARENT": {
+      "date": "2026-10-14",
+      "industry": "Drug Manufacturers - General",
+      "sector": "Healthcare",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "SAKAR": {
       "date": "2026-10-15",
@@ -11736,6 +12024,12 @@
       "sector": "Consumer Cyclical",
       "source": "Finance provider classification metadata"
     },
+    "SEIL": {
+      "date": "2026-10-14",
+      "industry": "Education & Training Services",
+      "sector": "Consumer Defensive",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "SEJALLTD": {
       "date": "2026-10-15",
       "industry": "Construction Materials",
@@ -11934,6 +12228,12 @@
       "sector": "Consumer Cyclical",
       "source": "Finance provider classification metadata"
     },
+    "SHANKESH": {
+      "date": "2026-10-14",
+      "industry": "Luxury Goods",
+      "sector": "Consumer Cyclical",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "SHANTHALA": {
       "date": "2026-10-15",
       "industry": "Food Distribution",
@@ -12017,6 +12317,12 @@
       "industry": "Drug Manufacturers - Specialty & Generic",
       "sector": "Healthcare",
       "source": "Finance provider classification metadata"
+    },
+    "SHIPROCKET": {
+      "date": "2026-10-14",
+      "industry": "Software - Application",
+      "sector": "Technology",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "SHIVALIK": {
       "date": "2026-10-15",
@@ -12120,6 +12426,12 @@
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
     },
+    "SHRINGARMS": {
+      "date": "2026-10-14",
+      "industry": "Luxury Goods",
+      "sector": "Consumer Cyclical",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "SHRIPISTON": {
       "date": "2026-10-15",
       "industry": "Auto - Parts",
@@ -12149,6 +12461,12 @@
       "industry": "Personal Products & Services",
       "sector": "Consumer Cyclical",
       "source": "Finance provider classification metadata"
+    },
+    "SHUKRAPHAR": {
+      "date": "2026-10-14",
+      "industry": "Drug Manufacturers - Specialty & Generic",
+      "sector": "Healthcare",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "SHYAMCENT": {
       "date": "2026-10-15",
@@ -12378,6 +12696,12 @@
       "sector": "Consumer Cyclical",
       "source": "Finance provider classification metadata"
     },
+    "SKYWAYS": {
+      "date": "2026-10-14",
+      "industry": "Integrated Freight & Logistics",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "SLONE": {
       "date": "2026-10-15",
       "industry": "Technology Distributors",
@@ -12449,6 +12773,12 @@
       "industry": "Chemicals - Specialty",
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
+    },
+    "SOLARWORLD": {
+      "date": "2026-10-14",
+      "industry": "Solar",
+      "sector": "Technology",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "SOLEX": {
       "date": "2026-10-15",
@@ -12768,6 +13098,12 @@
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
     },
+    "STLNETWORK": {
+      "date": "2026-10-14",
+      "industry": "Telecom Services",
+      "sector": "Communication Services",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "STLTECH": {
       "date": "2026-10-15",
       "industry": "Communication Equipment",
@@ -12784,6 +13120,12 @@
       "date": "2026-10-14",
       "industry": "Auto Parts",
       "sector": "Consumer Cyclical",
+      "source": "Yahoo Finance industry (fallback)"
+    },
+    "STYL": {
+      "date": "2026-10-14",
+      "industry": "Software - Infrastructure",
+      "sector": "Technology",
       "source": "Yahoo Finance industry (fallback)"
     },
     "STYLAMIND": {
@@ -12911,6 +13253,12 @@
       "industry": "Medical - Pharmaceuticals",
       "sector": "Healthcare",
       "source": "Finance provider classification metadata"
+    },
+    "SUNSHINE": {
+      "date": "2026-10-14",
+      "industry": "Entertainment",
+      "sector": "Communication Services",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "SUNTECK": {
       "date": "2026-10-15",
@@ -13170,6 +13518,12 @@
       "sector": "Financial Services",
       "source": "Finance provider classification metadata"
     },
+    "TAALTECH": {
+      "date": "2026-10-14",
+      "industry": "Airports & Air Services",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "TAC": {
       "date": "2026-10-15",
       "industry": "Software - Application",
@@ -13392,6 +13746,12 @@
       "sector": "Technology",
       "source": "Finance provider classification metadata"
     },
+    "TECHNOCRAF": {
+      "date": "2026-10-14",
+      "industry": "Infrastructure Operations",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "TECHNOE": {
       "date": "2026-10-15",
       "industry": "Engineering & Construction",
@@ -13469,6 +13829,12 @@
       "industry": "Engineering & Construction",
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
+    },
+    "TGVSL": {
+      "date": "2026-10-14",
+      "industry": "Chemicals",
+      "sector": "Basic Materials",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "THANGAMAYL": {
       "date": "2026-10-15",
@@ -13571,6 +13937,12 @@
       "industry": "Packaging & Containers",
       "sector": "Consumer Cyclical",
       "source": "Finance provider classification metadata"
+    },
+    "TIMEX": {
+      "date": "2026-10-14",
+      "industry": "Luxury Goods",
+      "sector": "Consumer Cyclical",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "TIMKEN": {
       "date": "2026-10-15",
@@ -13806,6 +14178,12 @@
       "sector": "Financial Services",
       "source": "Finance provider classification metadata"
     },
+    "TRUALT": {
+      "date": "2026-10-14",
+      "industry": "Oil & Gas Refining & Marketing",
+      "sector": "Energy",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "TSFINV": {
       "date": "2026-10-15",
       "industry": "Asset Management",
@@ -13961,6 +14339,12 @@
       "industry": "Construction Materials",
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
+    },
+    "ULTRAMAR": {
+      "date": "2026-10-14",
+      "industry": "Specialty Chemicals",
+      "sector": "Basic Materials",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "UMA": {
       "date": "2026-10-15",
@@ -14154,6 +14538,12 @@
       "sector": "Financial Services",
       "source": "Finance provider classification metadata"
     },
+    "UTLSOLAR": {
+      "date": "2026-10-14",
+      "industry": "Solar",
+      "sector": "Technology",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "UTTAMSUGAR": {
       "date": "2026-10-15",
       "industry": "Food Confectioners",
@@ -14268,6 +14658,12 @@
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
     },
+    "VEDPOWER": {
+      "date": "2026-10-14",
+      "industry": "Utilities - Independent Power Producers",
+      "sector": "Utilities",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "VEEDOL": {
       "date": "2026-10-15",
       "industry": "Chemicals - Specialty",
@@ -14369,6 +14765,12 @@
       "industry": "Chemicals - Specialty",
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
+    },
+    "VIDYAWIRES": {
+      "date": "2026-10-14",
+      "industry": "Electrical Equipment & Parts",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "VIJAYA": {
       "date": "2026-10-15",
@@ -14532,6 +14934,12 @@
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
     },
+    "VISL": {
+      "date": "2026-10-14",
+      "industry": "Steel",
+      "sector": "Basic Materials",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "VITAL": {
       "date": "2026-10-15",
       "industry": "Chemicals - Specialty",
@@ -14597,6 +15005,18 @@
       "industry": "Construction Materials",
       "sector": "Basic Materials",
       "source": "Finance provider classification metadata"
+    },
+    "VOEPL": {
+      "date": "2026-10-14",
+      "industry": "Consumer Electronics",
+      "sector": "Technology",
+      "source": "Yahoo Finance industry (fallback)"
+    },
+    "VOGL": {
+      "date": "2026-10-14",
+      "industry": "Other Industrial Metals & Mining",
+      "sector": "Basic Materials",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "VOLTAMP": {
       "date": "2026-10-15",
@@ -14778,6 +15198,12 @@
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
     },
+    "WEWORK": {
+      "date": "2026-10-14",
+      "industry": "Real Estate Services",
+      "sector": "Real Estate",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "WHEELS": {
       "date": "2026-10-15",
       "industry": "Auto - Parts",
@@ -14903,6 +15329,12 @@
       "industry": "Information Technology Services",
       "sector": "Technology",
       "source": "Finance provider classification metadata"
+    },
+    "XTRANET": {
+      "date": "2026-10-14",
+      "industry": "Information Technology Services",
+      "sector": "Technology",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "YASHO": {
       "date": "2026-10-15",
