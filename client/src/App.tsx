@@ -15,7 +15,10 @@ type SortKey="score"|"d1"|"w1"|"m1"|"m3"|"rs_excess"|"above50"|"rank_change";
 function value(g:Group,key:SortKey){return g[key];}
 function exportCSV(rows:Record<string,unknown>[],name:string){
  if(!rows.length)return;
- const cols=Object.keys(rows[0]);const cell=(v:unknown)=>`"${String(v??"").replaceAll('"','""')}"`;
+ const cols=Object.keys(rows[0]);const cell=(v:unknown)=>{
+  const text=typeof v==="string"&&/^[=+\-@\t\r]/.test(v)?"'"+v:String(v??"");
+  return `"${text.replaceAll('"','""')}"`;
+ };
  const csv=[cols.map(cell).join(","),...rows.map(r=>cols.map(k=>cell(r[k])).join(","))].join("\n");
  const a=document.createElement("a");const url=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}));a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
