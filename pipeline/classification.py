@@ -35,6 +35,16 @@ THEMES={
 }
 LOG=logging.getLogger("classification")
 
+def parse_members(raw):
+    f=pd.read_csv(BytesIO(raw));f.columns=f.columns.str.strip()
+    if "Symbol" not in f or not ({"Company Name","Company"}&set(f.columns)) or len(f)<3:
+        raise ValueError("Invalid constituent CSV")
+    symbols=f.Symbol.dropna().astype(str).str.strip()
+    if not symbols.str.fullmatch(r"[A-Z0-9][A-Z0-9&.\-]*").all():raise ValueError("Invalid NSE symbol")
+    members=sorted(set(symbols))
+    if len(members)!=len(f):raise ValueError("Duplicate/empty members")
+    return members
+
 def acquire(symbols,offline=False,preview=False):
     data=json.loads(PATH.read_text()) if PATH.exists() else {"industries":{},"themes":{}}
     now=datetime.now(timezone.utc);today=now.date().isoformat()
@@ -61,10 +71,7 @@ def acquire(symbols,offline=False,preview=False):
         for host in ("https://www.niftyindices.com/IndexConstituent/","https://niftyindices.com/IndexConstituent/","https://nsearchives.nseindia.com/content/indices/"):
             try:
                 with urlopen(Request(host+filename,headers={"User-Agent":"Mozilla/5.0"}),timeout=15) as r:raw=r.read()
-                f=pd.read_csv(BytesIO(raw));f.columns=f.columns.str.strip()
-                if not {"Symbol","Company Name"}.issubset(f.columns) or len(f)<3:raise ValueError("Invalid constituent CSV")
-                members=sorted(set(f.Symbol.dropna().astype(str).str.strip()))
-                if len(members)!=len(f):raise ValueError("Duplicate/empty members")
+                members=parse_members(raw)
                 return name,dict(symbols=members,url=url,date=today,status="Fresh official constituents")
             except Exception:pass
         if old and (now.date()-datetime.fromisoformat(old["date"]).date()).days<=14:

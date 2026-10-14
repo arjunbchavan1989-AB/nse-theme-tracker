@@ -1,4 +1,4 @@
-import {useEffect,useMemo,useState} from "react";
+import {useEffect,useMemo,useRef,useState} from "react";
 import {ArrowDown,ArrowUp,ArrowUpRight,Check,ChevronRight,Copy,Download,Grid2X2,Info,Layers3,List,Menu,Moon,RefreshCw,Search,Sun,X} from "lucide-react";
 import {ResponsiveContainer,LineChart,Line,Tooltip,XAxis,YAxis,CartesianGrid} from "recharts";
 import type {Snapshot,Group,Stock} from "../../shared/schema";
@@ -30,16 +30,19 @@ export default function App(){
  const [dark,setDark]=useState(()=>matchMedia("(prefers-color-scheme: dark)").matches),[mobile,setMobile]=useState(false);
  const [status,setStatus]=useState(""),[error,setError]=useState(""),[loading,setLoading]=useState(true),[fallback,setFallback]=useState(false),[manual,setManual]=useState("");
  const [copied,setCopied]=useState(false),[refreshing,setRefreshing]=useState(false);
+ const copyOrigin=useRef<HTMLElement|null>(null);
  useEffect(()=>{document.documentElement.dataset.theme=dark?"dark":"light"},[dark]);
- async function read(name:string){
+ useEffect(()=>{document.querySelector("main")?.scrollTo({top:0})},[page,kind]);
+ useEffect(()=>{if(!status)return;const t=setTimeout(()=>setStatus(""),6500);return()=>clearTimeout(t)},[status]);
+ async function read(name:string,markFallback=false){
    const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),12000);
-   try{const r=await fetch(RAW+name+"?v="+Math.floor(Date.now()/60000),{signal:controller.signal});if(!r.ok)throw Error("Remote feed unavailable");const p=await r.json();setFallback(false);return p}
-   catch{const r=await fetch("./data/"+name+"?v="+Math.floor(Date.now()/60000));if(!r.ok)throw Error("No validated snapshot available yet. The first daily workflow may still be running.");setFallback(true);return r.json()}
+   try{const r=await fetch(RAW+name+"?v="+Math.floor(Date.now()/60000),{signal:controller.signal});if(!r.ok)throw Error("Remote feed unavailable");const p=await r.json();if(markFallback)setFallback(false);return p}
+   catch{const r=await fetch("./data/"+name+"?v="+Math.floor(Date.now()/60000));if(!r.ok)throw Error("No validated snapshot available yet. The first daily workflow may still be running.");if(markFallback)setFallback(true);return r.json()}
    finally{clearTimeout(timer)}
  }
  async function refresh(explicit=false){
    setRefreshing(true);setError("");
-   try{const p:Snapshot=await read(session==="latest"?"latest.json":`history/${session}.json`);if(p.schema_version!==1||!Array.isArray(p.stocks)||!Array.isArray(p.groups))throw Error("Invalid snapshot format");setData(p);setLoading(false);if(explicit)setStatus("Published snapshot reloaded. This does not start GitHub Actions.");}
+   try{const p:Snapshot=await read(session==="latest"?"latest.json":`history/${session}.json`,true);if(p.schema_version!==1||!Array.isArray(p.stocks)||!Array.isArray(p.groups))throw Error("Invalid snapshot format");setData(p);setLoading(false);if(explicit)setStatus("Published snapshot reloaded. This does not start GitHub Actions.");}
    catch(e){setError((e as Error).message);setLoading(false)}
    finally{setRefreshing(false)}
  }
@@ -57,15 +60,31 @@ export default function App(){
  },[data,active,trend,stockQuery,stockSort,all]);
  const ranked=(data?.groups||[]).filter(g=>g.kind===kind&&g.rank!=null);
  const leader=[...ranked].sort((a,b)=>(b.score||0)-(a.score||0))[0];
- const stockMap=useMemo(()=>new Map((data?.stocks||[]).map(r=>[r.symbol,r])),[data]);
- const chart=active?.spark.map((v,i)=>({i:i-63,group:v,benchmark:data?.benchmark_returns.m3!=null?null:null}))||[];
+ const chart=active?.spark.map((v,i)=>({i:i-63,group:v}))||[];
  async function copySymbols(rows:Stock[]){
+   copyOrigin.current=document.activeElement as HTMLElement;
    const text=[...new Set(rows.map(s=>tv(s.symbol)))].join(",");
    if(!text){setStatus("No stocks match the current filters.");return}
    try{await navigator.clipboard.writeText(text);setCopied(true);setStatus(`${rows.length} TradingView symbols copied.`);setTimeout(()=>setCopied(false),2200)}
    catch{setManual(text);setStatus("Clipboard blocked. Select and copy the symbols below.")}
  }
  useEffect(()=>{const fn=(e:KeyboardEvent)=>{if(e.key==="Escape"){setManual("");setMobile(false)}};document.addEventListener("keydown",fn);return()=>document.removeEventListener("keydown",fn)},[]);
+ useEffect(()=>{
+  if(!manual)return;
+  const trap=(e:KeyboardEvent)=>{
+   if(e.key!=="Tab")return;
+   const elements=Array.from(document.querySelectorAll<HTMLElement>('.copy-modal textarea,.copy-modal button'));
+   const first=elements[0],last=elements[elements.length-1];
+   if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+   else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+  };
+  document.addEventListener("keydown",trap);
+  return()=>{document.removeEventListener("keydown",trap);copyOrigin.current?.focus()};
+ },[manual]);
+ function selectGroup(g:Group){
+   setSelected(g.id);setStockQuery("");
+   if(matchMedia("(max-width:1250px)").matches)requestAnimationFrame(()=>document.querySelector(".detail-panel")?.scrollIntoView({block:"start",behavior:"smooth"}));
+ }
  function changeKind(k:"industry"|"theme"){setKind(k);setSelected("");setQuery("");setStockQuery("");setPage("market");setMobile(false)}
  function sortBy(k:SortKey){if(sort===k)setDescending(!descending);else{setSort(k);setDescending(true)}}
  const sourceDate=data?.last_trading_date||"Awaiting EOD";
@@ -102,7 +121,7 @@ export default function App(){
      <div className="research-grid">
       <section className="panel ranking-panel"><div className="panel-title"><div><h2>Leadership rankings</h2><p>{groups.length} groups shown · click to inspect leaders</p></div><div className="segmented"><button aria-label="Table view" className={view==="table"?"on":""} onClick={()=>setView("table")}><List size={17}/></button><button aria-label="Heatmap view" className={view==="heatmap"?"on":""} onClick={()=>setView("heatmap")}><Grid2X2 size={17}/></button></div></div>
        <div className="filters"><label className="search"><Search size={16}/><input aria-label="Search groups or member stocks" placeholder="Search group or stock…" value={query} onChange={e=>setQuery(e.target.value)}/>{query&&<button className="clear" aria-label="Clear group search" onClick={()=>setQuery("")}><X size={14}/></button>}</label><label>Min stocks<select aria-label="Minimum stocks per group" value={min} onChange={e=>setMin(+e.target.value)}><option value={0}>All groups</option><option value={3}>3 stocks</option><option value={5}>5 stocks</option><option value={10}>10 stocks</option></select></label><label>Sort<select aria-label="Sort groups" value={sort} onChange={e=>{setSort(e.target.value as SortKey);setDescending(true)}}>{keys.map(([v,l])=><option key={v} value={v}>{l}</option>)}</select></label><button className="icon-button" aria-label={descending?"Sort ascending":"Sort descending"} onClick={()=>setDescending(!descending)}>{descending?<ArrowDown size={16}/>:<ArrowUp size={16}/>}</button></div>
-       {groups.length===0?<div className="empty"><Search size={24}/><h3>No groups match</h3><p>Try a broader search or fewer members.</p><button onClick={()=>{setQuery("");setMin(0)}}>Reset filters</button></div>:view==="heatmap"?<div className="heatmap">{groups.map(g=><button key={g.id} className={`heat-tile ${active?.id===g.id?"selected":""}`} onClick={()=>{setSelected(g.id);setStockQuery("")}} style={{"--heat":g.score==null?"var(--subtle)":`color-mix(in srgb, var(--accent) ${Math.max(5,g.score*.32)}%, var(--surface))`} as React.CSSProperties}><span>#{g.rank??"—"} · {g.count} stocks</span><b>{g.name}</b><strong>{fmt(g.score)}</strong><small>1M <i className={sign(g.m1)}>{pct(g.m1)}</i> · SMA50 {fmt(g.above50,0)}%</small></button>)}</div>:<div className="table-scroll"><table className="group-table"><thead><tr><th>Rank</th><th className="name-col">Group / 3M path</th><th><button onClick={()=>sortBy("score")}>Score {sort==="score"?(descending?"↓":"↑"):""}</button></th><th><button onClick={()=>sortBy("w1")}>1W</button></th><th><button onClick={()=>sortBy("m1")}>1M</button></th><th><button onClick={()=>sortBy("m3")}>3M</button></th><th><button onClick={()=>sortBy("above50")}>Breadth</button></th><th>Stocks</th></tr></thead><tbody>{groups.map(g=><tr key={g.id} className={active?.id===g.id?"selected":""} onClick={()=>{setSelected(g.id);setStockQuery("")}}><td><span className={`rank ${g.rank&&g.rank<=3?"top":""}`}>{g.rank??"—"}</span>{g.rank_change!=null&&g.rank_change!==0&&<small className={sign(g.rank_change)}>{g.rank_change>0?"↑":"↓"}{Math.abs(g.rank_change)}</small>}</td><td><button className="group-name" onClick={()=>{setSelected(g.id);setStockQuery("")}}>{g.name}<small>{g.status}</small></button><Spark data={g.spark}/></td><td><b>{fmt(g.score)}</b><div className="score-track"><span style={{width:`${g.score||0}%`}}/></div></td><td className={sign(g.w1)}>{pct(g.w1)}</td><td className={sign(g.m1)}>{pct(g.m1)}</td><td className={sign(g.m3)}>{pct(g.m3)}</td><td>{g.above50==null?"N/A":fmt(g.above50,0)+"%"}<small>above SMA50</small></td><td>{g.count}</td></tr>)}</tbody></table></div>}
+       {groups.length===0?<div className="empty"><Search size={24}/><h3>No groups match</h3><p>Try a broader search or fewer members.</p><button onClick={()=>{setQuery("");setMin(0)}}>Reset filters</button></div>:view==="heatmap"?<div className="heatmap">{groups.map(g=><button key={g.id} className={`heat-tile ${active?.id===g.id?"selected":""}`} onClick={()=>selectGroup(g)} style={{"--heat":g.score==null?"var(--subtle)":`color-mix(in srgb, var(--accent) ${Math.max(5,g.score*.32)}%, var(--surface))`} as React.CSSProperties}><span>#{g.rank??"—"} · {g.count} stocks</span><b>{g.name}</b><strong>{fmt(g.score)}</strong><small>1M <i className={sign(g.m1)}>{pct(g.m1)}</i> · SMA50 {fmt(g.above50,0)}%</small></button>)}</div>:<div className="table-scroll"><table className="group-table"><thead><tr><th>Rank</th><th className="name-col">Group / 3M path</th><th><button onClick={()=>sortBy("score")}>Score {sort==="score"?(descending?"↓":"↑"):""}</button></th><th><button onClick={()=>sortBy("w1")}>1W</button></th><th><button onClick={()=>sortBy("m1")}>1M</button></th><th><button onClick={()=>sortBy("m3")}>3M</button></th><th><button onClick={()=>sortBy("above50")}>Breadth</button></th><th>Stocks</th></tr></thead><tbody>{groups.map(g=><tr key={g.id} className={active?.id===g.id?"selected":""} onClick={()=>selectGroup(g)}><td><span className={`rank ${g.rank&&g.rank<=3?"top":""}`}>{g.rank??"—"}</span>{g.rank_change!=null&&g.rank_change!==0&&<small className={sign(g.rank_change)}>{g.rank_change>0?"↑":"↓"}{Math.abs(g.rank_change)}</small>}</td><td><button className="group-name" onClick={e=>{e.stopPropagation();selectGroup(g)}}>{g.name}<small>{g.status}</small></button><Spark data={g.spark}/></td><td><b>{fmt(g.score)}</b><div className="score-track"><span style={{width:`${g.score||0}%`}}/></div></td><td className={sign(g.w1)}>{pct(g.w1)}</td><td className={sign(g.m1)}>{pct(g.m1)}</td><td className={sign(g.m3)}>{pct(g.m3)}</td><td>{g.above50==null?"N/A":fmt(g.above50,0)+"%"}<small>above SMA50</small></td><td>{g.count}</td></tr>)}</tbody></table></div>}
        <div className="panel-foot"><span>Scores are research composites, not buy signals.</span><button onClick={()=>exportCSV(groups.map(g=>({group:g.name,rank:g.rank,score:g.score,stocks:g.count,return_1d:g.d1,return_1w:g.w1,return_1m:g.m1,return_3m:g.m3,rs_excess_3m:g.rs_excess,above_sma50_pct:g.above50,rank_change:g.rank_change})),`theme-atlas-${kind}-${sourceDate}.csv`)}><Download size={14}/>Export groups</button></div>
       </section>
       <aside className="panel detail-panel" aria-label="Selected group leaders">{active?<><div className="detail-header"><span className="eyebrow">{kind==="industry"?"INDUSTRY GROUP":"OFFICIAL THEME BASKET"}</span><h2>{active.name}</h2><div className="detail-meta"><span className="badge">{active.status}</span><span>{active.count} eligible stocks</span><span>Rank {active.rank??"unavailable"}</span></div></div>

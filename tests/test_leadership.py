@@ -1,7 +1,7 @@
 import sys,unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"pipeline"))
-from leadership import groups,aggregate,pct
+from leadership import groups,aggregate,pct,stocks
 import pandas as pd
 
 def row(s,i="Steel",value=10):
@@ -45,3 +45,24 @@ class LeadershipTests(unittest.TestCase):
         gs=groups([],{"themes":{"Energy":{"url":"https://example.com","date":"2026-10-14"}}},{})
         self.assertEqual(gs[0]["count"],0)
         self.assertIsNone(gs[0]["score"])
+    def test_short_history_stock_retained_unscored(self):
+        dates=pd.bdate_range("2026-01-01",periods=30)
+        f=pd.DataFrame({"Close":[100+i for i in range(30)],"High":[105+i for i in range(30)],"Volume":[100000]*30},index=dates)
+        b=pd.DataFrame({"close":[1000+i for i in range(30)]},index=dates)
+        rs=stocks({"rows":[{"symbol":"NEWIPO"}]},{"NEWIPO":f},b,{"industries":{},"themes":{}})
+        self.assertEqual(len(rs),1)
+        self.assertIsNone(rs[0]["score"])
+        self.assertIsNone(rs[0]["m3"])
+        self.assertEqual(rs[0]["industry"],"Unclassified")
+    def test_stale_benchmark_rejected(self):
+        dates=pd.bdate_range("2026-01-01",periods=30)
+        f=pd.DataFrame({"Close":[100]*30,"High":[105]*30,"Volume":[100000]*30},index=dates)
+        b=pd.DataFrame({"close":[1000]*29},index=dates[:-1])
+        with self.assertRaises(ValueError):stocks({"rows":[{"symbol":"A"}]},{"A":f},b,{"industries":{},"themes":{}})
+    def test_leader_score_ties_alphabetical(self):
+        g=aggregate([row("Z"),row("A")],"industry","Steel",{})
+        self.assertEqual(g["leaders"],["A","Z"])
+    def test_group_score_bounds(self):
+        rows=[row("A"),row("B"),row("C")]
+        gs=groups(rows,{"themes":{}},{})
+        self.assertTrue(0<=gs[0]["score"]<=100)

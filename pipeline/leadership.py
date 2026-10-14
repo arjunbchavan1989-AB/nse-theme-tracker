@@ -55,7 +55,7 @@ def aggregate(rows,kind,name,benchmark_returns,source_url="",mapping_date=""):
                 rvol=number(np.median([r["rvol"] for r in rows if r["rvol"] is not None])) if rows else None,
                 spark=spark,score=None,rank=None,rank_change=None,status="Limited sample",momentum=None,breadth=None,
                 leadership=None,coverage_m3=coverage["m3"],source_url=source_url,mapping_date=mapping_date,
-                leaders=[r["symbol"] for r in sorted(rows,key=lambda r:(r["score"] is not None,r["score"] or -1,r["m1"] or -999,r["symbol"]),reverse=True)[:10]])
+                leaders=[r["symbol"] for r in sorted(rows,key=lambda r:(r["score"] is None,-r["score"] if r["score"] is not None else 0,r["symbol"]))[:10]])
 
 def groups(rows,mappings,benchmark_returns,previous=None):
     output=[]
