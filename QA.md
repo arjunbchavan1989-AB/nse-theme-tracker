@@ -12,6 +12,7 @@
 - Verification plan: regression tests, strict TypeScript/build, independent GitHub refresh, public desktop/mobile screenshots, top10 clipboard, filter round-trip and empty-search reset.
 - Executed regression:34 Python tests passed, including strict SMA50 equality, below/missing rejection, empty trend universe, two-member industry ranking and unchanged three-member theme ranking.
 - Browser controls verified industry default2 →theme default3 →industry2 and empty-search Reset→2. The old optional SMA50 checkbox is absent and replaced by an enforced-rule badge.
+- Exploratory QA caught a stale GitHub Raw response with the old selection policy. Added mandatory rule-version, SMA50-row and two-stock-industry checks on BOTH remote and bundled snapshots; old-rule responses cannot silently populate current-rule counts. Eight Node regression checks cover this cache/data-policy guard.
 
 ## Required signoff
 

@@ -48,6 +48,7 @@ jobs:
           pip install -r pipeline/requirements.txt
           npm ci --prefer-offline
           python -m unittest discover -s tests -v
+          npx tsx tests/snapshot_policy.ts
           npm run check
       - name: Independently acquire completed EOD
         if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.refresh_data)

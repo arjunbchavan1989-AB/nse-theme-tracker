@@ -1,0 +1,12 @@
+import assert from "node:assert/strict";
+import {assertCurrentSnapshot} from "../client/src/snapshot-policy.ts";
+const valid={schema_version:1,selection_policy:{id:"above_sma50_industry2_v1",close_above_sma50:true,industry_min_members:2,theme_min_members:3},stocks:[{above50:100,history_bars:64}],groups:[{kind:"industry",count:2}]};
+assert.doesNotThrow(()=>assertCurrentSnapshot(valid));
+assert.throws(()=>assertCurrentSnapshot({...valid,selection_policy:undefined}),/predates/);
+assert.throws(()=>assertCurrentSnapshot({...valid,selection_policy:{...valid.selection_policy,industry_min_members:3}}),/predates/);
+assert.throws(()=>assertCurrentSnapshot({...valid,stocks:[{above50:0,history_bars:200}]}),/outside/);
+assert.throws(()=>assertCurrentSnapshot({...valid,stocks:[{above50:null,history_bars:30}]}),/outside/);
+assert.throws(()=>assertCurrentSnapshot({...valid,stocks:[{above50:100,history_bars:49}]}),/outside/);
+assert.throws(()=>assertCurrentSnapshot({...valid,groups:[{kind:"industry",count:1}]}),/fewer/);
+assert.doesNotThrow(()=>assertCurrentSnapshot({...valid,stocks:[],groups:[]}));
+console.log("Snapshot-policy regression checks:8 passed");

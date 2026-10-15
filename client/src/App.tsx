@@ -28,6 +28,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import type { Snapshot, Group, Stock } from "../../shared/schema";
+import {assertCurrentSnapshot} from "./snapshot-policy";
 
 const REPO = "https://github.com/arjunbchavan1989-AB/nse-theme-tracker";
 const RAW =
@@ -156,6 +157,7 @@ export default function App() {
       );
       if (!r.ok) throw Error("Remote feed unavailable");
       const p = await r.json();
+      if(name!=="sessions.json")assertCurrentSnapshot(p);
       if (markFallback) setFallback(false);
       return p;
     } catch {
@@ -166,8 +168,10 @@ export default function App() {
         throw Error(
           "No validated snapshot available yet. The first daily workflow may still be running.",
         );
+      const p=await r.json();
+      if(name!=="sessions.json")assertCurrentSnapshot(p);
       if (markFallback) setFallback(true);
-      return r.json();
+      return p;
     } finally {
       clearTimeout(timer);
     }
@@ -497,7 +501,7 @@ export default function App() {
               <Info size={16} />
               {data?.mode.includes("bootstrap")
                 ? "Dated bootstrap preview. The first independent EOD refresh is pending."
-                : "Using the bundled dated snapshot; the live GitHub feed is unavailable."}{" "}
+                : "Using the bundled dated snapshot; the live feed is unavailable or still cached under older rules."}{" "}
               Session: {sourceDate}.
             </div>
           )}
