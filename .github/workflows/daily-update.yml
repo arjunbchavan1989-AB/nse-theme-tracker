@@ -2,6 +2,8 @@ name: Daily Theme Leadership and Pages
 on:
   schedule:
     - cron: '0 14 * * *' # 19:30 Asia/Kolkata; GitHub may delay starts
+    - cron: '15 14 * * *' # 19:45 IST guarded fallback
+    - cron: '30 14 * * *' # 20:00 IST guarded fallback
   workflow_dispatch:
     inputs:
       refresh_data:
@@ -50,14 +52,17 @@ jobs:
           python -m unittest discover -s tests -v
           npx tsx tests/snapshot_policy.ts
           npm run check
+      - name: Check own completed-session freshness
+        id: freshness
+        run: python pipeline/refresh_guard.py --snapshot client/public/data/latest.json --event "${{ github.event_name }}" --refresh-data "${{ inputs.refresh_data }}"
       - name: Independently acquire completed EOD
-        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.refresh_data)
+        if: steps.freshness.outputs.refresh == 'true'
         shell: bash
         run: |
           set -euo pipefail
           python pipeline/run.py 2>&1 | tee /tmp/theme-scan.log
       - uses: actions/cache/save@v5
-        if: always() && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.refresh_data))
+        if: always() && steps.freshness.outputs.refresh == 'true'
         with:
           path: pipeline/cache
           key: theme-own-market-${{ runner.os }}-${{ github.run_id }}
