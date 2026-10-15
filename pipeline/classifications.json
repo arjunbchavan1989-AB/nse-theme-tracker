@@ -4824,6 +4824,12 @@
       "sector": "Healthcare",
       "source": "Finance provider classification metadata"
     },
+    "GLASSWALL": {
+      "date": "2026-10-15",
+      "industry": "Engineering & Construction",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "GLAXO": {
       "date": "2026-10-15",
       "industry": "Drug Manufacturers - General",
@@ -7068,6 +7074,12 @@
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
     },
+    "KANOHAR": {
+      "date": "2026-10-15",
+      "industry": "Electrical Equipment & Parts",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "KANORICHEM": {
       "date": "2026-10-15",
       "industry": "Chemicals",
@@ -8844,6 +8856,12 @@
       "sector": "Financial Services",
       "source": "Finance provider classification metadata"
     },
+    "MOMSBELIEF": {
+      "date": "2026-10-15",
+      "industry": "Medical Care Facilities",
+      "sector": "Healthcare",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "MON100": {
       "date": "2026-10-15",
       "industry": "Asset Management - Global",
@@ -10091,6 +10109,12 @@
       "industry": "Manufacturing - Metal Fabrication",
       "sector": "Industrials",
       "source": "Finance provider classification metadata"
+    },
+    "PAUSHAKLTD": {
+      "date": "2026-10-15",
+      "industry": "Specialty Chemicals",
+      "sector": "Basic Materials",
+      "source": "Yahoo Finance industry (fallback)"
     },
     "PAVNAIND": {
       "date": "2026-10-15",
