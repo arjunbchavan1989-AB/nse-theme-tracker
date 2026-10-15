@@ -17,6 +17,9 @@ class LeadershipTests(unittest.TestCase):
         self.assertEqual(groups([row("A")],{"themes":{}},{}),[])
     def test_two_stock_industry_ranked(self):
         self.assertEqual(groups([row("A"),row("B")],{"themes":{}},{})[0]["rank"],1)
+    def test_empty_trend_selection_is_valid(self):
+        self.assertEqual(above_sma50([]),[])
+        self.assertEqual(groups([],{"themes":{}},{}),[])
     def test_two_stock_theme_still_unranked(self):
         gs=groups([row("A"),row("B")],{"themes":{"Defence":{"url":"https://example.com","date":"2026-10-14"}}},{})
         self.assertIsNone(next(g for g in gs if g["kind"]=="theme")["rank"])

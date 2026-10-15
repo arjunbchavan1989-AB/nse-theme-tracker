@@ -35,7 +35,6 @@ def run(bootstrap=None,offline=False):
     base_rows=stocks(source,frames,benchmark,mappings)
     if not base_rows or len(base_rows)/len(source["rows"])<.95:raise RuntimeError("Less than 95% pre-trend universe retained")
     rows=above_sma50(base_rows)
-    if not rows:raise RuntimeError("No stocks above SMA50; retaining last good snapshot")
     policy=dict(id="above_sma50_industry2_v1",close_above_sma50=True,industry_min_members=2,theme_min_members=3,
                 breadth_denominator="Original four-filter group members with known SMA50",
                 stock_score_universe="Above-SMA50 stocks passing all four base filters")
@@ -60,8 +59,8 @@ def run(bootstrap=None,offline=False):
                         "Leader score: 20% 1W return percentile +30% 1M +30% 3M +20% 3M benchmark-excess percentile.",
                         "Group score: 55% momentum percentile composite (20% 1W,35% 1M,45% 3M),25% benchmark-excess percentile,20% original four-filter group SMA50 breadth.",
                         "Industry and theme scores are ranked separately. Ties use average percentiles.",
-                        "Industries require at least2 above-SMA50 members and2 with3M history; themes retain3 members and3 with3M history. Both require at least70%3M coverage. One-stock industries are omitted.",
-                        "Stocks require50 bars to assess SMA50. Those with50–63 bars can qualify but remain unscored until3M data is available.",
+                        "Industries require at least 2 above-SMA50 members and 2 with 3M history; themes retain 3 members and 3 with 3M history. Both require at least 70% 3M coverage. One-stock industries are omitted.",
+                        "Stocks require 50 bars to assess SMA50. Those with 50–63 bars can qualify but remain unscored until 3M data is available.",
                         "Breadth uses original four-filter group members with known SMA50, including those below it; returns, charts, counts and leaders use only the above-SMA50 subset.",
                         "Rank change compares the previous published trading session under the same selection policy; unavailable across a rule change.",
                         "Sparkline is the equal-weight normalized path of current members with 64 bars, not a historical-membership index or backtest.",

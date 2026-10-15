@@ -878,12 +878,13 @@ export default function App() {
                             rank: g.rank,
                             score: g.score,
                             stocks: g.count,
+                            base_universe_stocks: g.base_count,
                             return_1d: g.d1,
                             return_1w: g.w1,
                             return_1m: g.m1,
                             return_3m: g.m3,
                             rs_excess_3m: g.rs_excess,
-                            above_sma50_pct: g.above50,
+                            base_above_sma50_pct: g.above50,
                             rank_change: g.rank_change,
                           })),
                           `theme-atlas-${kind}-${sourceDate}.csv`,
@@ -911,6 +912,7 @@ export default function App() {
                         <div className="detail-meta">
                           <span className="badge">{active.status}</span>
                           <span>{active.count} eligible stocks</span>
+                          {active.base_count!=null&&<span>of {active.base_count} base stocks</span>}
                           <span>Rank {active.rank ?? "unavailable"}</span>
                         </div>
                       </div>
@@ -1187,7 +1189,7 @@ export default function App() {
                 <li>
                   Breadth: percentage of the original four-filter group with a
                   known SMA50 closing above it. The denominator includes stocks
-                  below SMA50, so this signal does not become a constant100%.
+                  below SMA50, so this signal does not become a constant 100%.
                 </li>
                 <li>
                   Industry groups and themes are scored separately. All
@@ -1247,7 +1249,7 @@ export default function App() {
                 Improving: other ranked groups with positive 1W return. Lagging:
                 remaining ranked groups. Industry rankings need at least two
                 above-SMA50 members and two 3M observations; themes retain the
-                minimum of three. Both require at least70% 3M coverage. One-stock
+                minimum of three. Both require at least 70% 3M coverage. One-stock
                 industries are omitted entirely.
               </p>
               <p>

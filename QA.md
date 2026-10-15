@@ -10,6 +10,8 @@
 - Required: pre-trend coverage guard is not wrongly evaluated after deliberate SMA50 exclusions; daily schedule remains19:30 IST.
 - Exploratory: exactly equal close/SMA50, unknown SMA50, a two-member industry shrinking to one and policy-change rank comparisons.
 - Verification plan: regression tests, strict TypeScript/build, independent GitHub refresh, public desktop/mobile screenshots, top10 clipboard, filter round-trip and empty-search reset.
+- Executed regression:34 Python tests passed, including strict SMA50 equality, below/missing rejection, empty trend universe, two-member industry ranking and unchanged three-member theme ranking.
+- Browser controls verified industry default2 →theme default3 →industry2 and empty-search Reset→2. The old optional SMA50 checkbox is absent and replaced by an enforced-rule badge.
 
 ## Required signoff
 
