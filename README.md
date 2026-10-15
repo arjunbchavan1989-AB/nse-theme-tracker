@@ -13,6 +13,11 @@ All four thresholds are strict:
 
 RS reference: **Nifty MidSmallcap 400**, exact dated exchange benchmark.
 
+Classification now additionally requires **EOD close strictly above SMA50**.
+Equal/below closes and stocks with fewer than50 sessions are excluded from
+industry/theme memberships, returns, charts and leader lists. This is an enforced
+pipeline rule, not an optional browser checkbox.
+
 ## Industry groups and official themes
 
 Industry classification is versioned finance-provider metadata, with labelled Yahoo Finance fallback for missing names. It is **not** the official NSE four-tier classification. Initial classification metadata was retrieved on 15 October 2026; review classifications periodically, particularly after demergers and business changes. Missing names are enriched on each production run; unknowns remain visible in data health and are not guessed into an industry.
@@ -32,13 +37,13 @@ Group score (0–100), ranked separately for industries and themes:
 
 - 55% momentum composite: 20% 1W percentile +35% 1M percentile +45% 3M percentile.
 - 25% percentile of mean member 3M excess return over Nifty MidSmallcap 400.
-- 20% observed percentage of known-history members above SMA50.
+- 20% observed percentage of the original four-filter group's known-history members above SMA50. The denominator retains below-SMA50 stocks; this breadth statistic must not degenerate to100% after trend filtering.
 
 Stock leader score uses full-universe component percentiles: 20% 1W +30% 1M +30% 3M +20% 3M benchmark excess.
 
-Percentile ties use average ranks. Stock leaders with missing required lookbacks are unscored and sort below scored stocks; new listings are not excluded from the eligible universe. Groups need at least 3 members, at least 3 members with 3M history and at least 70% 3M coverage to receive a rank. Small/limited samples remain visible but unranked.
+Percentile ties use average ranks. Stock leaders are ranked across the above-SMA50 universe. Stocks with50–63 bars can pass the trend gate but remain unscored until3M history is available. Industry groups require **at least2 above-SMA50 members and2 members with3M history**; themes retain3 members and3 with3M history. Both require at least70%3M coverage. One-stock industries are omitted. Industry view defaults to a2-stock minimum; themes default to3.
 
-Rank change compares the previous published trading session, not an intraday run. First-session change is unavailable. Sparkline charts show a current-member equal-weight normalized basket of members with 64 bars, **not a historical-membership index or backtest**.
+Rank change compares the previous published trading session under the same selection policy, not an intraday run or a different filter policy. First-session/rule-change comparisons are unavailable. Sparkline charts show a current-member equal-weight normalized basket of above-SMA50 members with64 bars, **not a historical-membership index or backtest**.
 
 Status: Leading = positive 1M return and RS-excess percentile ≥50; Improving = other ranked groups with positive 1W; Lagging = remaining ranked groups.
 
@@ -56,7 +61,7 @@ The repository independently acquires:
 
 Production never reads any other dashboard. Each repo owns its market cache, mappings, benchmark, history and output. Source modules were reused, not live feeds.
 
-Guards: ≥95% listing/history coverage, ≥95% same-session coverage, ≥95% shares coverage on liquidity-qualified names, ≥95% industry classification, ≥70% configured official themes and ≥95% retained eligible stocks. Failure does not overwrite the last good snapshot. For an explicitly labelled local bootstrap preview only, classification coverage can be ≥90%.
+Guards: ≥95% listing/history coverage, ≥95% same-session coverage, ≥95% shares coverage on liquidity-qualified names, ≥95% industry classification, ≥70% configured official themes and ≥95% retained pre-trend eligible stocks. The95% retention guard is checked BEFORE applying the intentional SMA50 exclusion. Failure does not overwrite the last good snapshot. For an explicitly labelled local bootstrap preview only, classification coverage can be ≥90%.
 
 Primary classifications are versioned metadata, not automatically reclassified business narratives. Cached theme membership may lag a reconstitution if the publisher is unavailable. Corporate-action history adjustments should be checked before trading.
 

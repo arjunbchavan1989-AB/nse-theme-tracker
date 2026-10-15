@@ -1,5 +1,16 @@
 # Theme Atlas verification inventory
 
+## Above-SMA50 /two-stock industry change
+
+- Required: every classified/displayed/copied stock has EOD close>SMA50 and enough history; equality and missing SMA50 cannot pass.
+- Required: two-stock industries appear and can rank; one-stock industries disappear; themes retain the existing three-stock rank minimum.
+- Required: default industry filter2; switching theme/industry restores3/2; search-reset must not restore an invalid0-stock industry setting.
+- Required: group memberships, returns, top10 and percentile scores use the filtered stock universe.
+- Required: breadth remains the original four-filter group proportion, labelled Base breadth; main KPI uses the original known-SMA50 denominator.
+- Required: pre-trend coverage guard is not wrongly evaluated after deliberate SMA50 exclusions; daily schedule remains19:30 IST.
+- Exploratory: exactly equal close/SMA50, unknown SMA50, a two-member industry shrinking to one and policy-change rank comparisons.
+- Verification plan: regression tests, strict TypeScript/build, independent GitHub refresh, public desktop/mobile screenshots, top10 clipboard, filter round-trip and empty-search reset.
+
 ## Required signoff
 
 - Independent daily workflow, 14:00 UTC /19:30 IST; verified run and Pages URL.

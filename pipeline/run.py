@@ -7,7 +7,7 @@ import pandas as pd
 from market_data import build,liquidity,FILTERS
 from benchmark import load,NAME
 from classification import acquire
-from leadership import stocks,groups,pct,WINDOWS
+from leadership import stocks,groups,pct,WINDOWS,above_sma50
 
 ROOT=Path(__file__).resolve().parent.parent
 PUBLIC=ROOT/"client/public/data"
@@ -32,32 +32,43 @@ def run(bootstrap=None,offline=False):
     benchmark=(pd.read_csv(ROOT/"pipeline/benchmark_midsmall400.csv",parse_dates=["date"]).set_index("date").loc[:session] if offline else load(session))
     if benchmark.empty or benchmark.index[-1]!=session:raise RuntimeError("Benchmark session does not match EOD")
     mappings,health=acquire([r["symbol"] for r in source["rows"]],offline,preview=bool(bootstrap))
-    rows=stocks(source,frames,benchmark,mappings)
+    base_rows=stocks(source,frames,benchmark,mappings)
+    if not base_rows or len(base_rows)/len(source["rows"])<.95:raise RuntimeError("Less than 95% pre-trend universe retained")
+    rows=above_sma50(base_rows)
+    if not rows:raise RuntimeError("No stocks above SMA50; retaining last good snapshot")
+    policy=dict(id="above_sma50_industry2_v1",close_above_sma50=True,industry_min_members=2,theme_min_members=3,
+                breadth_denominator="Original four-filter group members with known SMA50",
+                stock_score_universe="Above-SMA50 stocks passing all four base filters")
     br={k:pct(benchmark.close,n) for k,n in WINDOWS.items()}
     previous=None
     archive=ROOT/"snapshots";archive.mkdir(exist_ok=True)
     earlier=sorted(p for p in archive.glob("*.json") if p.stem<str(session.date()))
     if earlier:previous=json.loads(earlier[-1].read_text())
-    group_rows=groups(rows,mappings,br,previous)
+    if previous and previous.get("selection_policy",{}).get("id")!=policy["id"]:previous=None
+    group_rows=groups(rows,mappings,br,previous,breadth_rows=base_rows)
+    market_health={**source["market_data"],"base_universe_count":len(base_rows),"above_sma50_count":len(rows),
+                   "excluded_at_or_below_sma50":sum(r["above50"]==0 for r in base_rows),
+                   "excluded_sma50_unavailable":sum(r["above50"] is None for r in base_rows)}
     payload=dict(schema_version=1,generated_at=datetime.now(ZoneInfo("Asia/Kolkata")).isoformat(),
                  last_trading_date=str(session.date()),mode=mode,benchmark=NAME,benchmark_returns=br,
-                 filters=FILTERS,market_data=source["market_data"],classification_health=health,stocks=rows,groups=group_rows,
-                 notes=["All group statistics use only stocks passing the four strict universe filters on the displayed session.",
+                 filters={**FILTERS,"close_above_sma50":True},selection_policy=policy,
+                 market_data=market_health,classification_health=health,stocks=rows,groups=group_rows,
+                 notes=["Classified stocks must pass all four base filters AND close strictly above SMA50. Equality, below-SMA50 closes and insufficient 50-bar history are excluded.",
                         "Industry labels are provider classifications, not official NSE basic-industry codes.",
                         "Themes use official Nifty constituent membership, not all companies with possible theme exposure. Memberships overlap.",
                         "Group returns are equal-weight arithmetic means of available member period returns. These are custom eligible baskets, not official index returns.",
                         "Leader score: 20% 1W return percentile +30% 1M +30% 3M +20% 3M benchmark-excess percentile.",
-                        "Group score: 55% momentum percentile composite (20% 1W,35% 1M,45% 3M),25% benchmark-excess percentile,20% observed SMA50 breadth.",
+                        "Group score: 55% momentum percentile composite (20% 1W,35% 1M,45% 3M),25% benchmark-excess percentile,20% original four-filter group SMA50 breadth.",
                         "Industry and theme scores are ranked separately. Ties use average percentiles.",
-                        "At least 3 members,3 stocks with 3M history,and 70% 3M coverage are required for a ranked group. Smaller samples remain visible, unranked.",
-                        "New listings remain eligible; insufficient lookbacks display unavailable, not zero. Unscored stocks sort below scored leaders.",
-                        "Rank change compares the previous published trading session; unavailable on the first session.",
+                        "Industries require at least2 above-SMA50 members and2 with3M history; themes retain3 members and3 with3M history. Both require at least70%3M coverage. One-stock industries are omitted.",
+                        "Stocks require50 bars to assess SMA50. Those with50–63 bars can qualify but remain unscored until3M data is available.",
+                        "Breadth uses original four-filter group members with known SMA50, including those below it; returns, charts, counts and leaders use only the above-SMA50 subset.",
+                        "Rank change compares the previous published trading session under the same selection policy; unavailable across a rule change.",
                         "Sparkline is the equal-weight normalized path of current members with 64 bars, not a historical-membership index or backtest.",
                         "19:30 IST daily schedule is best-effort GitHub timing. Non-trading days retain the latest verified completed session.",
                         "Latest price bars are official NSE EOD; vendor historical backfill and shares supply history and market-cap estimates.",
                         "ADR20 is mean(100×(high−low)/previous close). RVOL uses the preceding20 sessions excluding the signal day.",
                         "Price-based research only. Verify corporate actions and classification before trading."])
-    if not rows or len(rows)/len(source["rows"])<.95:raise RuntimeError("Less than 95% universe retained")
     text=json.dumps(payload,separators=(",",":"),allow_nan=False)
     PUBLIC.mkdir(parents=True,exist_ok=True)
     temp=PUBLIC/"latest.next.json";temp.write_text(text);temp.replace(PUBLIC/"latest.json")

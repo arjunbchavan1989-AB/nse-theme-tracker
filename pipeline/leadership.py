@@ -29,6 +29,10 @@ def stocks(source,frames,benchmark,mappings):
                      "classification_source":meta.get("source","Missing"),"classification_date":meta.get("date",""),
                      "themes":[name for name,t in mappings["themes"].items() if symbol in t["symbols"]],
                      "history_bars":len(f),"spark":[number(v/c.iloc[-min(len(c),64)]*100) for v in c.tail(64)],"score":None})
+    return score_stocks(rows)
+
+def score_stocks(rows):
+    for r in rows:r["score"]=None
     ranked=[r for r in rows if all(r[k] is not None for k in ("w1","m1","m3","rs_excess"))]
     if ranked:
         df=pd.DataFrame(ranked)
@@ -36,6 +40,10 @@ def stocks(source,frames,benchmark,mappings):
         score=.2*df.w1.rank(pct=True)+.3*df.m1.rank(pct=True)+.3*df.m3.rank(pct=True)+.2*df.rs_excess.rank(pct=True)
         for r,v in zip(ranked,score):r["score"]=number(v*100)
     return rows
+
+def above_sma50(rows):
+    """Strict EOD close>SMA50. Missing 50-bar history and equality cannot pass."""
+    return score_stocks([dict(r) for r in rows if r.get("above50")==100])
 
 def aggregate(rows,kind,name,benchmark_returns,source_url="",mapping_date=""):
     metrics={};coverage={}
@@ -57,17 +65,28 @@ def aggregate(rows,kind,name,benchmark_returns,source_url="",mapping_date=""):
                 leadership=None,coverage_m3=coverage["m3"],source_url=source_url,mapping_date=mapping_date,
                 leaders=[r["symbol"] for r in sorted(rows,key=lambda r:(r["score"] is None,-r["score"] if r["score"] is not None else 0,r["symbol"]))[:10]])
 
-def groups(rows,mappings,benchmark_returns,previous=None):
+def groups(rows,mappings,benchmark_returns,previous=None,breadth_rows=None):
+    if breadth_rows is None:breadth_rows=rows
+    rows=[r for r in rows if r.get("above50")==100]
     output=[]
     for name in sorted({r["industry"] for r in rows if r["industry"]!="Unclassified"}):
         members=[r for r in rows if r["industry"]==name]
-        output.append(aggregate(members,"industry",name,benchmark_returns))
+        if len(members)>=2:output.append(aggregate(members,"industry",name,benchmark_returns))
     for name,t in mappings["themes"].items():
         members=[r for r in rows if name in r["themes"]]
         output.append(aggregate(members,"theme",name,benchmark_returns,t["url"],t["date"]))
+    # Breadth deliberately retains the four-filter parent denominator. Otherwise
+    # an above-SMA50-only basket would always report100% and lose all information.
+    for g in output:
+        base=[r for r in (breadth_rows if breadth_rows is not None else rows)
+              if (r["industry"]==g["name"] if g["kind"]=="industry" else g["name"] in r["themes"])]
+        known=[r["above50"] for r in base if r["above50"] is not None]
+        g["base_count"]=len(base)
+        g["above50"]=number(np.mean(known)) if known else None
     for kind in ("industry","theme"):
-        eligible=[g for g in output if g["kind"]==kind and g["count"]>=3 and
-                  g["coverage_m3"]>=3 and g["coverage_m3"]/g["count"]>=.7 and
+        minimum=2 if kind=="industry" else 3
+        eligible=[g for g in output if g["kind"]==kind and g["count"]>=minimum and
+                  g["coverage_m3"]>=minimum and g["coverage_m3"]/g["count"]>=.7 and
                   all(g[k] is not None for k in ("w1","m1","m3","rs_excess","above50"))]
         if not eligible:continue
         df=pd.DataFrame(eligible)

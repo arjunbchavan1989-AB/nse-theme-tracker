@@ -1,7 +1,7 @@
 import sys,unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"pipeline"))
-from leadership import groups,aggregate,pct,stocks
+from leadership import groups,aggregate,pct,stocks,above_sma50
 import pandas as pd
 
 def row(s,i="Steel",value=10):
@@ -14,8 +14,35 @@ class LeadershipTests(unittest.TestCase):
     def test_exact_return(self):
         self.assertEqual(pct(pd.Series([100]*21+[110]),21),10)
     def test_small_unranked(self):
-        gs=groups([row("A"),row("B")],{"themes":{}},{})
-        self.assertIsNone(gs[0]["rank"])
+        self.assertEqual(groups([row("A")],{"themes":{}},{}),[])
+    def test_two_stock_industry_ranked(self):
+        self.assertEqual(groups([row("A"),row("B")],{"themes":{}},{})[0]["rank"],1)
+    def test_two_stock_theme_still_unranked(self):
+        gs=groups([row("A"),row("B")],{"themes":{"Defence":{"url":"https://example.com","date":"2026-10-14"}}},{})
+        self.assertIsNone(next(g for g in gs if g["kind"]=="theme")["rank"])
+    def test_below_and_unknown_sma50_excluded(self):
+        rs=[row("A"),row("B"),row("C"),row("D")]
+        rs[2]["above50"]=0;rs[3]["above50"]=None
+        self.assertEqual([r["symbol"] for r in above_sma50(rs)],["A","B"])
+        g=groups(rs,{"themes":{}},{})[0]
+        self.assertEqual(g["members"],["A","B"])
+        self.assertAlmostEqual(g["above50"],66.6667,places=4)
+        self.assertEqual(g["base_count"],4)
+    def test_filtering_can_remove_one_stock_industry(self):
+        rs=[row("A"),row("B")];rs[1]["above50"]=0
+        self.assertEqual(groups(rs,{"themes":{}},{}),[])
+    def test_trend_selection_reranks_only_qualified_stocks(self):
+        rs=[row("A"),row("B")];rs[0]["above50"]=0
+        selected=above_sma50(rs)
+        self.assertEqual(len(selected),1)
+        self.assertEqual(selected[0]["score"],100)
+    def test_equal_close_to_sma50_fails(self):
+        dates=pd.bdate_range("2026-01-01",periods=64)
+        f=pd.DataFrame({"Close":[100]*64,"High":[105]*64,"Volume":[100000]*64},index=dates)
+        b=pd.DataFrame({"close":[1000]*64},index=dates)
+        rs=stocks({"rows":[{"symbol":"FLAT"}]},{"FLAT":f},b,{"industries":{},"themes":{}})
+        self.assertEqual(rs[0]["above50"],0)
+        self.assertEqual(above_sma50(rs),[])
     def test_three_ranked(self):
         gs=groups([row("A"),row("B"),row("C")],{"themes":{}},{})
         self.assertEqual(gs[0]["rank"],1)
