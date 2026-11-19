@@ -5574,6 +5574,12 @@
       "sector": "Financial Services",
       "source": "Finance provider classification metadata"
     },
+    "HDFIRE": {
+      "date": "2026-11-19",
+      "industry": "Specialty Industrial Machinery",
+      "sector": "Industrials",
+      "source": "Yahoo Finance industry (fallback)"
+    },
     "HDIL": {
       "date": "2026-10-15",
       "industry": "Real Estate - Diversified",
@@ -15675,7 +15681,7 @@
   },
   "themes": {
     "CPSE": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "BEL",
@@ -15693,7 +15699,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftycpselist.csv"
     },
     "Capital Markets": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "360ONE",
@@ -15717,7 +15723,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftyCapitalMarkets_list.csv"
     },
     "Commodities": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "ADANIENSOL",
@@ -15754,7 +15760,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftycommoditieslist.csv"
     },
     "Consumption": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "APOLLOHOSP",
@@ -15791,7 +15797,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftyconsumptionlist.csv"
     },
     "Defence": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "AEQUS",
@@ -15820,7 +15826,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftyindiadefence_list.csv"
     },
     "Digital India": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "AFFLE",
@@ -15877,7 +15883,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftyindiadigital_list.csv"
     },
     "EV & New-age Auto": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "ARE&M",
@@ -15921,7 +15927,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftyEv_NewAgeAutomotive_list.csv"
     },
     "Energy": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "ABB",
@@ -15968,7 +15974,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftyenergylist.csv"
     },
     "Housing": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "ACC",
@@ -16025,7 +16031,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftyhousing_list.csv"
     },
     "Infrastructure": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "ADANIGREEN",
@@ -16062,7 +16068,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftyinfralist.csv"
     },
     "Infrastructure & Logistics": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "ABB",
@@ -16169,7 +16175,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftyIndiaInfrastructure_Logistics_list.csv"
     },
     "Internet": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "ANGELONE",
@@ -16199,7 +16205,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftyIndiaInternet_list.csv"
     },
     "Manufacturing": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "ABB",
@@ -16283,7 +16289,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftyindiamanufacturing_list.csv"
     },
     "Mobility": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "ADANIPORTS",
@@ -16320,7 +16326,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftymobility_list.csv"
     },
     "New-age Consumption": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "360ONE",
@@ -16402,7 +16408,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftyIndiaNewAgeConsumption_list.csv"
     },
     "Non-cyclical Consumer": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "ASIANPAINT",
@@ -16439,7 +16445,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftynon-cyclicalconsumer_list.csv"
     },
     "Public Sector Enterprises": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "BEL",
@@ -16466,7 +16472,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftypselist.csv"
     },
     "Railways PSU": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "BEL",
@@ -16490,7 +16496,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftyIndiaRailwaysPSU_list.csv"
     },
     "Rural": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "ADANIGREEN",
@@ -16572,7 +16578,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftyRural_list.csv"
     },
     "Tourism": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "BLS",
@@ -16590,7 +16596,7 @@
       "url": "https://www.niftyindices.com/IndexConstituent/ind_niftyindiatourism_list.csv"
     },
     "Transportation & Logistics": {
-      "date": "2026-11-18",
+      "date": "2026-11-19",
       "status": "Fresh official constituents",
       "symbols": [
         "ADANIPORTS",
